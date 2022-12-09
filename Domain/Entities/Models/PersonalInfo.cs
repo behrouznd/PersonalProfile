@@ -42,9 +42,23 @@ namespace Entities.Models
         [MaxLength(100)]
         public string? Address { get; set; }
 
+        public string? Introduction { get; set; }
+
+        [MaxLength(200)]
+        public string? PicProfile { get; set; }
+
         [ForeignKey(nameof(PersonalInfo))]
         public Guid LanguageId { get; set; }
         public Language? Language { get; set; }
+
+        public ICollection<Experience>? Experiences { get; set; }
+        public ICollection<Education>? Educations { get; set; }
+        public ICollection<SkillGroup>? SkillGroups { get; set; }
+
+        public ICollection<SocialMedia>? SocialMedias { get; set; }
+
+        public ICollection<Portfolio>? Portfolios { get; set; }
+        public ICollection<Certificate>? Certificates { get; set; }
 
     }
 }
