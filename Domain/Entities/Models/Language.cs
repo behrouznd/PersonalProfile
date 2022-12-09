@@ -17,8 +17,6 @@ namespace Entities.Models
         [MaxLength(120)]
         public string? PathFlag { get; set; }
 
-        [ForeignKey(nameof(PersonalInfo))]
-        public Guid PersonalInfoId { get; set; }
         public PersonalInfo? PersonalInfo { get; set; }
     }
 }

@@ -14,7 +14,8 @@ namespace PersonalProfile.ContextFacory
                 .Build();
 
             var builder = new DbContextOptionsBuilder<RepositoryContext>()
-                .UseSqlServer(configuration.GetConnectionString("SqlConnection"));
+                .UseSqlServer(configuration.GetConnectionString("SqlConnection"),
+                    b=> b.MigrationsAssembly("PersonalProfile"));
 
             return new RepositoryContext(builder.Options);
              

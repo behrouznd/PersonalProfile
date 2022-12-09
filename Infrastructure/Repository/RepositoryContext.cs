@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Repository.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,12 @@ namespace Repository
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new LanguageConfiguration());
+        }
+
 
         public DbSet<Language>?   Languages { get; set; }
         public DbSet<PersonalInfo>?  PersonalInfos { get; set; }
