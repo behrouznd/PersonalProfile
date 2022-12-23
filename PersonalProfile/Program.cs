@@ -1,6 +1,9 @@
 using PersonalProfile.Extentions;
 using NLog;
-
+using Contracts;
+using Entities.ErrorModel;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +22,10 @@ builder.Services.AddControllers().AddApplicationPart(typeof(PersonalProfile.Pres
 
 var app = builder.Build();
 
-if(app.Environment.IsDevelopment())
-    app.UseDeveloperExceptionPage();
-else
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+app.ConfigureExceptionHandler(logger);
+
+if(app.Environment.IsProduction())
     app.UseHsts();
 
 app.UseHttpsRedirection();

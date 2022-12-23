@@ -22,19 +22,10 @@ namespace Service
 
    
         public IEnumerable<LanguageDto> GetAllLanguages(bool trackChanges)
-        {
-            try
-            {
-                var languages = _repository.Language.GetAllLanguages(trackChanges);
-                var langiagesDto = _mapper.Map<IEnumerable<LanguageDto>>(languages);
-                return langiagesDto;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong in the {nameof(GetAllLanguages)} service method {ex}");
-
-                throw;
-            }
+        {             
+            var languages = _repository.Language.GetAllLanguages(trackChanges);
+            var langiagesDto = _mapper.Map<IEnumerable<LanguageDto>>(languages);
+            return langiagesDto;             
         }
     }
 }

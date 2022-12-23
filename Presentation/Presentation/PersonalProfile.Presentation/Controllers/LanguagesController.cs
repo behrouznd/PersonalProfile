@@ -20,16 +20,8 @@ namespace PersonalProfile.Presentation.Controllers
         [HttpGet]
         public IActionResult GetLanguages()
         {
-            try
-            {
-                var languages = _service.LanguageService.GetAllLanguages(trackChanges: false);
-                return Ok(languages);
-            }
-            catch (Exception)
-            {
-
-                return StatusCode(500, "Internal server error");
-            }
+            var languages = _service.LanguageService.GetAllLanguages(trackChanges: false);
+            return Ok(languages);             
         }
         
     }
