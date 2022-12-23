@@ -1,6 +1,8 @@
-﻿namespace Service.Contracts
+﻿using Shared.DataTransferObject;
+
+namespace Service.Contracts;
+public interface ILanguageService
 {
-    public interface ILanguageService
-    {
-    }
+    IEnumerable<LanguageDto> GetAllLanguages(bool trackChanges);
 }
+

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PersonalProfile.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/personalinfos")]
     [ApiController]
     public class PersonalInfosController : ControllerBase
     {

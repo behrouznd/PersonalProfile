@@ -1,4 +1,5 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using Service.Contracts;
 
 namespace Service
@@ -17,18 +18,19 @@ namespace Service
         private readonly Lazy<ISocialMediaService> _socialMediaService;
 
         public ServiceManager(IRepositoryManager repositoryManager,
-            ILoggerManager logger)
+            ILoggerManager logger,
+            IMapper mapper)
         {
-            _certificateService = new Lazy<ICertificateService>(() => new CertificateService(repositoryManager, logger));
-            _contactService = new Lazy<IContactService>(() => new ContactService(repositoryManager, logger));
-            _educationService = new Lazy<IEducationService>(() => new EducationService(repositoryManager,logger));
-            _experienceService = new Lazy<IExperienceService>(() => new ExperienceService(repositoryManager, logger));
-            _languageService = new Lazy<ILanguageService>(() => new LanguageService(repositoryManager, logger));
-            _personalInfoService = new Lazy<IPersonalInfoService>(() => new PersonalInfoService(repositoryManager, logger));
-            _portfolioService = new Lazy<IPortfolioService>(() => new PortfolioService(repositoryManager, logger));
-            _skillGroupService = new Lazy<ISkillGroupService>(() => new SkillGroupService(repositoryManager, logger));
-            _skillService = new Lazy<ISkillService>(()=> new SkillService(repositoryManager, logger));
-            _socialMediaService = new Lazy<ISocialMediaService>(() => new SocialMediaService(repositoryManager, logger));
+            _certificateService = new Lazy<ICertificateService>(() => new CertificateService(repositoryManager, logger , mapper));
+            _contactService = new Lazy<IContactService>(() => new ContactService(repositoryManager, logger, mapper));
+            _educationService = new Lazy<IEducationService>(() => new EducationService(repositoryManager,logger, mapper));
+            _experienceService = new Lazy<IExperienceService>(() => new ExperienceService(repositoryManager, logger, mapper));
+            _languageService = new Lazy<ILanguageService>(() => new LanguageService(repositoryManager, logger, mapper));
+            _personalInfoService = new Lazy<IPersonalInfoService>(() => new PersonalInfoService(repositoryManager, logger, mapper));
+            _portfolioService = new Lazy<IPortfolioService>(() => new PortfolioService(repositoryManager, logger, mapper));
+            _skillGroupService = new Lazy<ISkillGroupService>(() => new SkillGroupService(repositoryManager, logger, mapper));
+            _skillService = new Lazy<ISkillService>(()=> new SkillService(repositoryManager, logger, mapper));
+            _socialMediaService = new Lazy<ISocialMediaService>(() => new SocialMediaService(repositoryManager, logger, mapper));
         }
 
 

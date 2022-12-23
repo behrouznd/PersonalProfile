@@ -8,5 +8,9 @@ namespace Repository
         public LanguageRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
         }
+
+        public IEnumerable<Language> GetAllLanguages(bool trackChanges)=>
+            FindAll(trackChanges).OrderBy(x => x.Id).ToList();
+         
     }
 }
