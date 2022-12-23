@@ -11,6 +11,10 @@ namespace Repository
 
         public IEnumerable<Language> GetAllLanguages(bool trackChanges)=>
             FindAll(trackChanges).OrderBy(x => x.Id).ToList();
+
+        public Language GetLanguage(Guid languageId, bool trackChanges)=>
+            FindByCondition(x=> x.Id.Equals(languageId),trackChanges)
+            .FirstOrDefault();
          
     }
 }

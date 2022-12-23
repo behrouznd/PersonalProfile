@@ -27,5 +27,12 @@ namespace Service
             var langiagesDto = _mapper.Map<IEnumerable<LanguageDto>>(languages);
             return langiagesDto;             
         }
+
+        public LanguageDto GetLanguage(Guid languageId, bool trackChanges)
+        {
+            var language = _repository.Language.GetLanguage(languageId, trackChanges);
+            var lauguageDto = _mapper.Map<LanguageDto>(language);
+            return lauguageDto;
+        }
     }
 }

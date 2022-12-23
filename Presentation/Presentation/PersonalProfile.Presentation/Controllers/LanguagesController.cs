@@ -23,6 +23,13 @@ namespace PersonalProfile.Presentation.Controllers
             var languages = _service.LanguageService.GetAllLanguages(trackChanges: false);
             return Ok(languages);             
         }
+
+        [HttpGet("{id:guid}")]
+        public IActionResult GetLanguage(Guid id)
+        {
+            var language = _service.LanguageService.GetLanguage(id, trackChanges: false);
+            return Ok(language);
+        }
         
     }
 }

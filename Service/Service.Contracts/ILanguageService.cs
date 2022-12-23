@@ -4,5 +4,7 @@ namespace Service.Contracts;
 public interface ILanguageService
 {
     IEnumerable<LanguageDto> GetAllLanguages(bool trackChanges);
+
+    LanguageDto GetLanguage(Guid languageId,bool trackChanges);
 }
 
