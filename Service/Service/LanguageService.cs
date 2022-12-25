@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Contracts;
+using Entities.Exceptions;
 using Service.Contracts;
 using Shared.DataTransferObject;
 
@@ -31,6 +32,9 @@ namespace Service
         public LanguageDto GetLanguage(Guid languageId, bool trackChanges)
         {
             var language = _repository.Language.GetLanguage(languageId, trackChanges);
+            if (language == null)
+                throw new LanguageNotFoundException(languageId);
+
             var lauguageDto = _mapper.Map<LanguageDto>(language);
             return lauguageDto;
         }
