@@ -28,6 +28,17 @@ namespace Repository
 
         public void Delete(T entity) => _repositoryContext.Set<T>().Remove(entity);
 
-        
+        public IQueryable<T> FindByConditionIncluding(Expression<Func<T, bool>> condition, bool trackChnages, params string[] conditions)
+        {
+            var repository = !trackChnages ?
+                _repositoryContext.Set<T>().Where(condition).AsNoTracking() :
+                _repositoryContext.Set<T>().Where(condition);
+
+            foreach (var item in conditions)
+            {
+                repository = repository.Include(item);
+            }
+            return repository;
+        }
     }
 }

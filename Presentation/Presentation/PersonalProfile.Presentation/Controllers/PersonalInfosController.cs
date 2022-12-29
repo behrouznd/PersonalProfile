@@ -1,15 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Service.Contracts;
 
 namespace PersonalProfile.Presentation.Controllers
 {
-    [Route("api/personalinfos")]
+    [Route("api/languages/{languageId}/personalinfos")]
     [ApiController]
     public class PersonalInfosController : ControllerBase
     {
+        private readonly IServiceManager _service;
+
+        public PersonalInfosController(IServiceManager serviceManager)=>  this._service = serviceManager;
+        
+
+        [HttpGet]
+        public IActionResult GetPersonalInfoForLanguage(Guid languageId)
+        {
+            var personalInfos = _service.PersonalInfoService.GetPersonalInfo(languageId , trackChanges: false);
+            return Ok(personalInfos);
+        }
     }
 }
