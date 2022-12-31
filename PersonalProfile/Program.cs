@@ -18,7 +18,8 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));
 
 
-builder.Services.AddControllers().AddApplicationPart(typeof(PersonalProfile.Presentation.AssemblyReference).Assembly);
+builder.Services.AddControllers()
+.AddApplicationPart(typeof(PersonalProfile.Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
 

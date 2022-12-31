@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
+using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObject;
 
@@ -21,7 +22,8 @@ namespace Service
             this._mapper = mapper;
         }
 
-   
+
+
         public IEnumerable<LanguageDto> GetAllLanguages(bool trackChanges)
         {             
             var languages = _repository.Language.GetAllLanguages(trackChanges);
@@ -37,6 +39,16 @@ namespace Service
 
             var lauguageDto = _mapper.Map<LanguageDto>(language);
             return lauguageDto;
+        }
+
+        public LanguageDto CreateLanguage(LanguageForCreationDto language)
+        {
+            var languageEntity = _mapper.Map<Language>(language);
+            _repository.Language.CreateLanguage(languageEntity);
+            _repository.Save();
+
+            var languageToReturn = _mapper.Map<LanguageDto>(languageEntity);
+            return languageToReturn;
         }
     }
 }
