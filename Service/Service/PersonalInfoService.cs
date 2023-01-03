@@ -39,7 +39,7 @@ namespace Service
                 throw new LanguageNotFoundException(languageId);
 
             var PersonalInfoByLanguageId = _repository.PersonalInfo.GetPersonalInfos(languageId, trackChanges);
-            if (PersonalInfoByLanguageId != null)
+            if (PersonalInfoByLanguageId != null && PersonalInfoByLanguageId.Count() > 0)
                 throw new Exception("PersonalInfo for this language is exists");
 
             var personalInfoEntity = _mapper.Map<PersonalInfo>(personalInfo);
