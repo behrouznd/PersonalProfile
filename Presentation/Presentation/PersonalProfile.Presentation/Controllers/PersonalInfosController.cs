@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Shared.DataTransferObject;
 
 namespace PersonalProfile.Presentation.Controllers
 {
@@ -12,11 +13,23 @@ namespace PersonalProfile.Presentation.Controllers
         public PersonalInfosController(IServiceManager serviceManager)=>  this._service = serviceManager;
         
 
-        [HttpGet]
+        [HttpGet(Name = "GetPersonalInfoForLanguage")]
         public IActionResult GetPersonalInfoForLanguage(Guid languageId)
         {
-            var personalInfos = _service.PersonalInfoService.GetPersonalInfo(languageId , trackChanges: false);
+            var personalInfos = _service.PersonalInfoService.GetPersonalInfo(languageId, trackChanges: false);
             return Ok(personalInfos);
+        }
+
+
+        [HttpPost]
+        public IActionResult CreatePersonalInfoForLanguage(Guid languageId,[FromBody] PersonalInfoForCreationDto personalInfo)
+        {
+            if (personalInfo == null)
+                BadRequest("PersonalInfoObject is null");
+
+            var personalInfoToReturn = _service.PersonalInfoService.CreatePersonalInfo(languageId, personalInfo, trackChanges: false);
+
+            return CreatedAtRoute("GetPersonalInfoForLanguage", new { languageId }, personalInfoToReturn);
         }
     }
 }

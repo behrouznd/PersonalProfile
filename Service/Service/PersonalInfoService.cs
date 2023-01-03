@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
+using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObject;
 
@@ -30,5 +31,24 @@ namespace Service
             var personalDto = _mapper.Map<PersonalInfoDto>(personaInfoFromDB);
             return personalDto;
         }
+
+        public PersonalInfoDto CreatePersonalInfo(Guid languageId, PersonalInfoForCreationDto personalInfo, bool trackChanges)
+        {
+            var language = _repository.Language.GetLanguage(languageId,trackChanges);
+            if (language == null)
+                throw new LanguageNotFoundException(languageId);
+
+            var PersonalInfoByLanguageId = _repository.PersonalInfo.GetPersonalInfos(languageId, trackChanges);
+            if (PersonalInfoByLanguageId != null)
+                throw new Exception("PersonalInfo for this language is exists");
+
+            var personalInfoEntity = _mapper.Map<PersonalInfo>(personalInfo);
+            _repository.PersonalInfo.CreatePersonalInfoForLanguage(languageId, personalInfoEntity);
+            _repository.Save();
+
+            var PersonalInfoToReturn = _mapper.Map<PersonalInfoDto>(personalInfoEntity);
+            return PersonalInfoToReturn;
+        }
+
     }
 }

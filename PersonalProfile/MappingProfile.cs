@@ -15,7 +15,7 @@ namespace PersonalProfile
             CreateMap<Certificate, CertificateDto>();
             CreateMap<PersonalInfo, PersonalInfoDto>();
             CreateMap<LanguageForCreationDto, Language>();
-
+            CreateMap<PersonalInfoForCreationDto, PersonalInfo>();
                /* .ConstructUsing(x => new PersonalInfoDto(x.Id, x.Name, x.Family, x.Title, x.Nationality, x.Birthday, 
                 x.MaritalStatus, x.Residence, x.Phone, x.Mobile, x.Email
                 , x.Address, x.Introduction, x.PicProfile ));

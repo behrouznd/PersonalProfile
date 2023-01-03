@@ -9,11 +9,18 @@ namespace Repository
         {
         }
 
+
         public IEnumerable<PersonalInfo> GetPersonalInfos(Guid languageId, bool trackChanges)=>
             FindByConditionIncluding(x=>x.LanguageId.Equals(languageId), trackChanges, 
                 "Educations", "Experiences", "Certificates", "SocialMedias")
             .ToList();
 
-         
+
+        public void CreatePersonalInfoForLanguage(Guid languageId, PersonalInfo personalInfo)
+        {
+            personalInfo.LanguageId = languageId;
+            Create(personalInfo);
+        }
+
     }
 }
