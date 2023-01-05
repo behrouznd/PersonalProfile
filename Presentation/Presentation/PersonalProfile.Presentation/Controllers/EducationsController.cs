@@ -22,5 +22,12 @@ namespace PersonalProfile.Presentation.Controllers
             var educations = _service.EducationService.GetByIds(ids,false);
             return Ok(educations);
         }
+
+        [HttpDelete("{id:guid}")]
+        public IActionResult DeleteEducationForPersonalInfo(Guid personalinfoid, Guid id)
+        {
+            _service.EducationService.DeleteEducationForPersonalInfo(personalinfoid,id,trackChanges:false);
+            return NoContent();
+        }
     }
 }

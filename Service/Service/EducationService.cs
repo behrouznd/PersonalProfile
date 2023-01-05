@@ -33,5 +33,20 @@ namespace Service
             var educationsDto = _mapper.Map<IEnumerable<EducationDto>>(educationsEntity);
             return educationsDto;
         }
+
+        public void DeleteEducationForPersonalInfo(Guid personalInfoId, Guid id, bool trackChanges)
+        {
+            var personalInfo = _repository.PersonalInfo.GetPersonalInfos(personalInfoId, trackChanges);
+            if (personalInfo == null)
+                throw new PersonalInfoNotFoundException(personalInfoId);
+
+            var educationEntity = _repository.Education.GetEducation(id, trackChanges);
+            if(educationEntity == null)
+                throw new EducationNotFoundException(id);
+
+            _repository.Education.DeleteEducation(educationEntity);
+            _repository.Save();
+
+        }
     }
 }
