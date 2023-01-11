@@ -25,7 +25,7 @@ namespace PersonalProfile.Presentation.Controllers
         public IActionResult CreatePersonalInfoForLanguage(Guid languageId,[FromBody] PersonalInfoForCreationDto personalInfo)
         {
             if (personalInfo == null)
-                BadRequest("PersonalInfoObject is null");
+                return BadRequest("PersonalInfoObject is null");
 
             var personalInfoToReturn = _service.PersonalInfoService.CreatePersonalInfo(languageId, personalInfo, trackChanges: false);
 
