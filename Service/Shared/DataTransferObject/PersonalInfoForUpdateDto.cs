@@ -13,5 +13,6 @@
         string Email,
         string Address,
         string Introduction,
-        string PicProfile);
+        string PicProfile,
+        IEnumerable<EducationForCreationDto> Educations);
 }
