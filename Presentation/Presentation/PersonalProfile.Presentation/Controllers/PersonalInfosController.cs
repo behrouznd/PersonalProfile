@@ -38,5 +38,14 @@ namespace PersonalProfile.Presentation.Controllers
             _service.PersonalInfoService.DeletePersonalInfo(languageId,personalId: id , trackChanges: false);
             return NoContent();
         }
+
+        [HttpPut("{id:guid}")]
+        public IActionResult UpdatePersonalInfoForLanguage(Guid languageId,Guid id,[FromBody] PersonalInfoForUpdateDto personalInfo)
+        {
+            if (personalInfo == null)
+                return BadRequest("PersonalInfo object is null");
+            _service.PersonalInfoService.UpdatePersonalInfoForLanguage(languageId,id, personalInfo, false,true);
+            return NoContent();
+        }
     }
 }

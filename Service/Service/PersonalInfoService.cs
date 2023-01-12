@@ -63,5 +63,18 @@ namespace Service
             _repository.PersonalInfo.DeletePersonalInfo(personalInfo);
             _repository.Save();
         }
+
+        public void UpdatePersonalInfoForLanguage(Guid languageId, Guid personalId, PersonalInfoForUpdateDto personalInfo, bool languageTrackChanges, bool personalTrackChanges)
+        {
+            var language = _repository.Language.GetLanguage(languageId, languageTrackChanges);
+            if (language == null)
+                throw new LanguageNotFoundException(languageId);
+            var personalInfoEntity = _repository.PersonalInfo.GetPersonalInfo(personalId, personalTrackChanges);
+            if(personalInfo == null)
+                throw new PersonalInfoNotFoundException(personalId);
+
+            _mapper.Map(personalInfo, personalInfoEntity);
+            _repository.Save();
+        }
     }
 }
