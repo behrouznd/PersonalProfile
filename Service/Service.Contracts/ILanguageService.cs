@@ -9,5 +9,7 @@ public interface ILanguageService
 
     LanguageDto CreateLanguage(LanguageForCreationDto language);
 
+    void DeleteLanguage(Guid languageId, bool trackChanges);
+
 }
 

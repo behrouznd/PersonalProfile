@@ -9,6 +9,9 @@ namespace Repository
         {
         }
 
+        public PersonalInfo GetPersonalInfo(Guid personalId, bool trackChanges) => 
+            FindByCondition( x=>x.Id.Equals( personalId ) , trackChanges).FirstOrDefault();   
+
 
         public IEnumerable<PersonalInfo> GetPersonalInfos(Guid languageId, bool trackChanges)=>
             FindByConditionIncluding(x=>x.LanguageId.Equals(languageId), trackChanges, 
@@ -22,5 +25,8 @@ namespace Repository
             Create(personalInfo);
         }
 
+        public void DeletePersonalInfo(PersonalInfo personalInfo)=> Delete(personalInfo);
+
+        
     }
 }

@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PersonalProfile.Presentation.Controllers
 {
@@ -40,6 +35,13 @@ namespace PersonalProfile.Presentation.Controllers
 
             var createdLanguage= _service.LanguageService.CreateLanguage(language);
             return CreatedAtRoute("LanguageById", new { id = createdLanguage.Id }, createdLanguage);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public IActionResult DeleteLanguage(Guid id)
+        {
+            _service.LanguageService.DeleteLanguage(id,trackChanges: false);
+            return NoContent();
         }
     }
 }

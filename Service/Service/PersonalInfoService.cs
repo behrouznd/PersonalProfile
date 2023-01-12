@@ -50,5 +50,18 @@ namespace Service
             return PersonalInfoToReturn;
         }
 
+        public void DeletePersonalInfo(Guid languageId, Guid personalId, bool trackChanges)
+        {
+            var language = _repository.Language.GetLanguage(languageId, trackChanges);
+            if (language == null)
+                throw new LanguageNotFoundException(languageId);
+
+            var personalInfo = _repository.PersonalInfo.GetPersonalInfo(personalId,trackChanges);
+            if(personalInfo == null)
+                throw new PersonalInfoNotFoundException(personalId);
+
+            _repository.PersonalInfo.DeletePersonalInfo(personalInfo);
+            _repository.Save();
+        }
     }
 }

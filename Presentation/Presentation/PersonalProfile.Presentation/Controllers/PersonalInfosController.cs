@@ -31,5 +31,12 @@ namespace PersonalProfile.Presentation.Controllers
 
             return CreatedAtRoute("GetPersonalInfoForLanguage", new { languageId }, personalInfoToReturn);
         }
+
+        [HttpDelete("{id:guid}")]
+        public IActionResult DeletePersonalInfoForLanguage(Guid languageId,Guid id)
+        {
+            _service.PersonalInfoService.DeletePersonalInfo(languageId,personalId: id , trackChanges: false);
+            return NoContent();
+        }
     }
 }

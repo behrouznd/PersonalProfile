@@ -20,7 +20,7 @@ namespace Repository
 
         public void CreateLanguage(Language language)=>
             Create(language);
-        
 
+        public void DeleteLanguage(Language language)=> Delete(language);
     }
 }

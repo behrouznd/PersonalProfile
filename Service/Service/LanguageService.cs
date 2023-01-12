@@ -50,5 +50,14 @@ namespace Service
             var languageToReturn = _mapper.Map<LanguageDto>(languageEntity);
             return languageToReturn;
         }
+
+        public void DeleteLanguage(Guid languageId, bool trackChanges)
+        {
+            var language= _repository.Language.GetLanguage(languageId,trackChanges);
+            if (language == null)
+                throw new LanguageNotFoundException(languageId);
+            _repository.Language.DeleteLanguage(language);
+            _repository.Save();
+        }
     }
 }
